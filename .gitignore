@@ -1,0 +1,81 @@
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+**/venv/
+**/.venv/
+
+# Python cache & compiled files
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest & Coverage
+.pytest_cache/
+**/.pytest_cache/
+.coverage
+.coverage.*
+coverage/
+**/coverage/
+htmlcov/
+coverage.xml
+
+# Type checkers & linters
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+.pyright/
+.cache/
+.eslintcache
+
+# Build artifacts
+build/
+**/build/
+dist/
+**/dist/
+*.egg-info/
+.eggs/
+
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Sensitive data
+bulk_create_results.csv
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db

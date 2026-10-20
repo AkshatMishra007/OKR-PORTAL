@@ -1,0 +1,310 @@
+.sidebar {
+  width: var(--sidebar);
+  height: 100vh;
+  height: 100dvh;
+
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  z-index: 100;
+
+  /* Important:
+     Only the navigation should scroll.
+  */
+  overflow: scroll;
+
+  transition: transform 0.3s ease;
+}
+
+.sidebar-nav {
+  flex: 1 1 auto;
+  min-height: 0;
+
+  padding: 16px 12px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Keep scrolling inside the module area */
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-section-label {
+  font-size: 10px;
+  color: var(--text3);
+
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+
+  padding: 0 8px;
+  margin: 16px 0 6px;
+
+  font-weight: 500;
+}
+
+.sidebar-logo {
+  padding: 24px 20px 20px;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+#sidebar-logo-img img {
+  max-width: 190px;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: block;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 9px 12px;
+  margin-bottom: 2px;
+
+  border-radius: var(--radius);
+
+  color: var(--text2);
+  font-size: 13.5px;
+  font-weight: 400;
+
+  cursor: pointer;
+  transition: var(--trans);
+
+  position: relative;
+
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* NavLink automatically adds active class */
+.nav-item.active {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+.nav-item.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 3px;
+  height: 18px;
+
+  background: var(--accent);
+
+  border-radius: 0 3px 3px 0;
+}
+
+.nav-badge {
+  margin-left: auto;
+
+  background: var(--accent);
+  color: #fff;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  padding: 2px 6px;
+
+  border-radius: 99px;
+}
+
+.sidebar-footer {
+  flex: 0 0 auto;
+
+  padding: 16px;
+  border-top: 1px solid var(--border);
+
+  background: var(--bg2);
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg,
+      #4f7dff,
+      #8b5cf6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #fff;
+
+  flex-shrink: 0;
+}
+
+.user-info-container {
+  width: 100%;
+
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.user-info {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+
+  color: var(--text3);
+  font-size: 12px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.user-role {
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.user-more {
+  margin-left: auto;
+  color: var(--text3);
+}
+
+
+/* =========================================================
+   Sidebar toggle
+   - Open: fixed sidebar overlays the page.
+   - Closed: sidebar is hidden and Layout renders the
+     floating open button.
+   - The page layout itself is never shifted.
+   ========================================================= */
+
+.sidebar {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sidebar.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-toggle-btn {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  background: var(--bg2);
+  color: var(--text2);
+
+  cursor: pointer;
+  transition: var(--trans);
+
+  z-index: 2;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+.sidebar-logo {
+  position: relative;
+  padding-right: 54px;
+}
+
+/* On mobile the sidebar is a drawer over the page. */
+@media (max-width: 768px) {
+  .sidebar {
+    width: min(var(--sidebar), 82vw);
+    transform: translateX(-100%);
+    box-shadow: none;
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+    box-shadow: 12px 0 30px rgba(0, 0, 0, 0.18);
+  }
+
+  .sidebar-nav {
+    padding: 14px 10px;
+  }
+
+  .sidebar-logo {
+    padding: 20px 54px 16px 18px;
+  }
+
+  .sidebar-footer {
+    padding: 14px;
+  }
+}
+
+/* On laptop/desktop the sidebar starts open and overlays
+   the page without changing the page width. */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar:not(.sidebar-open) {
+    transform: translateX(-100%);
+  }
+}

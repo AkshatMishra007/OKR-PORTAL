@@ -1,0 +1,1397 @@
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.page-header p {
+  margin: 5px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.primary-btn,
+.secondary-btn {
+  border: none;
+  border-radius: 7px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: 0.2s ease;
+}
+
+.primary-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+}
+
+.secondary-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.secondary-btn:hover {
+  background: #e5e7eb;
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.filters-bar select {
+  height: 40px;
+  padding: 0 34px 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: white;
+  color: #374151;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.search-box {
+  height: 40px;
+  min-width: 230px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.search-box svg {
+  color: #6b7280;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+  background: transparent;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.card-header span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1100px;
+}
+
+.table-wrapper th {
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 650;
+  text-align: left;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.table-wrapper td {
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.table-wrapper tbody tr:hover {
+  background: #fafafa;
+}
+
+
+/* =========================================================
+   EMPLOYEE CELL
+========================================================= */
+
+.employee-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.employee-cell strong {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.employee-cell span {
+  font-size: 11px;
+  color: var(--text3);
+}
+
+
+/* =========================================================
+   QUARTER
+========================================================= */
+
+.quarter-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   OKR COUNT
+========================================================= */
+
+.okr-count {
+  font-weight: 600;
+  color: #374151;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.status-badge.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.closed {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.status-badge.draft {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-buttons button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: white;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.action-buttons button:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+
+/* =========================================================
+   EMPTY TABLE
+========================================================= */
+
+.empty-table {
+  text-align: center !important;
+  padding: 45px !important;
+  color: #9ca3af !important;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.pagination {
+  min-height: 60px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+}
+
+.rows-per-page {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.rows-per-page select {
+  height: 32px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  padding: 0 7px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.pagination-controls button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d1d5db;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.okr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ADD OKR MODAL
+========================================================= */
+
+.okr-modal {
+  width: min(1050px, 100%);
+  max-height: 92vh;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   VIEW MODAL
+========================================================= */
+
+.okr-view-modal {
+  width: min(900px, 100%);
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.okr-modal-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.okr-modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #111827;
+}
+
+.okr-modal-header p {
+  margin: 5px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.modal-close-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+
+/* =========================================================
+   STEPPER
+========================================================= */
+
+.okr-stepper {
+  display: flex;
+  align-items: center;
+  padding: 18px 30px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+}
+
+.okr-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9ca3af;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.okr-step.active {
+  color: #2563eb;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.okr-step.active .step-number {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: white;
+}
+
+.step-line {
+  flex: 1;
+  height: 1px;
+  background: #d1d5db;
+  margin: 0 15px;
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.okr-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.section-heading {
+  margin-bottom: 22px;
+}
+
+.section-heading h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #111827;
+}
+
+.section-heading p {
+  margin: 5px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.okr-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #111827;
+  background: white;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-group input,
+.form-group select {
+  height: 42px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08);
+}
+
+.form-group select:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CONTEXT SUMMARY
+========================================================= */
+
+.context-summary {
+  margin-top: 24px;
+  border: 1px solid #dbeafe;
+  background: #eff6ff;
+  border-radius: 9px;
+  padding: 16px;
+}
+
+.context-summary-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 12px;
+}
+
+.context-summary-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 20px;
+}
+
+.context-summary-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.context-summary-content strong {
+  font-size: 13px;
+  color: #111827;
+}
+
+.context-summary-content span {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   SELECTED EMPLOYEE MINI CARD
+========================================================= */
+
+.selected-employee-mini {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+}
+
+.selected-employee-mini > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.selected-employee-mini strong {
+  font-size: 13px;
+  color: #111827;
+}
+
+.selected-employee-mini span {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   OKR LIST
+========================================================= */
+
+.okr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.okr-entry {
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 18px;
+  background: white;
+}
+
+.okr-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.okr-entry-header h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #111827;
+}
+
+.remove-okr-btn {
+  border: none;
+  background: transparent;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.remove-okr-btn:hover {
+  color: #b91c1c;
+}
+
+
+/* =========================================================
+   ADD ANOTHER OKR
+========================================================= */
+
+.add-another-okr-btn {
+  margin-top: 18px;
+  border: 1px dashed #93c5fd;
+  background: #eff6ff;
+  color: #2563eb;
+  width: 100%;
+  height: 42px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.add-another-okr-btn:hover {
+  background: #dbeafe;
+}
+
+
+/* =========================================================
+   PREVIEW CONTEXT
+========================================================= */
+
+.preview-context {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+.preview-context-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.preview-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.preview-context-main h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #111827;
+}
+
+.preview-context-main span {
+  display: block;
+  margin-top: 3px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.preview-context-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  padding-top: 17px;
+}
+
+.preview-context-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.preview-context-grid label,
+.view-cycle-grid label {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.preview-context-grid strong,
+.view-cycle-grid strong {
+  font-size: 13px;
+  color: #111827;
+}
+
+
+/* =========================================================
+   PREVIEW OKR LIST
+========================================================= */
+
+.preview-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.preview-list-header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #111827;
+}
+
+.preview-list-header span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.preview-okr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-okr-card {
+  display: flex;
+  gap: 13px;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 15px;
+}
+
+.preview-okr-number {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.preview-okr-content {
+  flex: 1;
+}
+
+.preview-okr-content h4 {
+  margin: 2px 0 6px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.preview-okr-content p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.preview-target {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.preview-target span {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.preview-target strong {
+  font-size: 12px;
+  color: #374151;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.okr-modal-footer {
+  min-height: 68px;
+  padding: 14px 24px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   VIEW EMPLOYEE HEADER
+========================================================= */
+
+.view-employee-header {
+  margin: 20px 24px 0;
+  padding: 15px;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.view-employee-header > div:nth-child(2) {
+  flex: 1;
+}
+
+.view-employee-header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #111827;
+}
+
+.view-employee-header span {
+  display: block;
+  margin-top: 3px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   VIEW CYCLE
+========================================================= */
+
+.view-cycle-grid {
+  margin: 18px 24px;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.view-cycle-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+/* =========================================================
+   VIEW OKR LIST
+========================================================= */
+
+.view-okr-list {
+  padding: 0 24px 20px;
+  overflow-y: auto;
+}
+
+.view-okr-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 17px;
+  margin-bottom: 12px;
+}
+
+.view-okr-header {
+  margin-bottom: 9px;
+}
+
+.view-okr-header span {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.view-okr-card h3 {
+  margin: 0 0 7px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.view-okr-card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.view-target {
+  margin-top: 13px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.view-target label {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.view-target strong {
+  font-size: 12px;
+  color: #374151;
+}
+/* =====================================================
+   EDIT OKR FIELDS
+===================================================== */
+
+.edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.edit-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475467;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.okr-form-input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #101828;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.okr-form-input:hover {
+  border-color: #98a2b3;
+}
+
+.okr-form-input:focus {
+  border-color: #667eea;
+
+  box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.12);
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.okr-form-textarea {
+  width: 100%;
+  min-height: 115px;
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #101828;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  line-height: 1.5;
+
+  resize: vertical;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.okr-form-textarea:hover {
+  border-color: #98a2b3;
+}
+
+.okr-form-textarea:focus {
+  border-color: #667eea;
+
+  box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.12);
+}
+
+
+/* =====================================================
+   PLACEHOLDER
+===================================================== */
+
+.okr-form-input::placeholder,
+.okr-form-textarea::placeholder {
+  color: #98a2b3;
+}
+
+
+/* =====================================================
+   OKR TYPE + TRACKER GRID
+===================================================== */
+
+.okr-edit-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.okr-select-wrapper {
+  position: relative;
+}
+
+.okr-form-select {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+
+  padding: 0 40px 0 14px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+
+  background-color: #ffffff;
+
+  color: #101828;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  outline: none;
+
+  appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, #667085 50%),
+    linear-gradient(135deg, #667085 50%, transparent 50%);
+
+  background-position:
+    calc(100% - 18px) 20px,
+    calc(100% - 13px) 20px;
+
+  background-size:
+    5px 5px,
+    5px 5px;
+
+  background-repeat: no-repeat;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.okr-form-select:hover {
+  border-color: #98a2b3;
+}
+
+.okr-form-select:focus {
+  border-color: #667eea;
+
+  box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.12);
+}
+
+
+/* =====================================================
+   TRACKER TOGGLE
+===================================================== */
+
+.okr-toggle {
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.okr-toggle-track {
+  width: 44px;
+  height: 24px;
+
+  padding: 2px;
+
+  box-sizing: border-box;
+
+  border-radius: 20px;
+
+  background: #d0d5dd;
+
+  transition: background 0.2s ease;
+}
+
+.okr-toggle-thumb {
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 3px rgba(16, 24, 40, 0.25);
+
+  transform: translateX(0);
+
+  transition: transform 0.2s ease;
+}
+
+.okr-toggle.active .okr-toggle-track {
+  background: #667eea;
+}
+
+.okr-toggle.active .okr-toggle-thumb {
+  transform: translateX(20px);
+}
+
+.okr-toggle span {
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #475467;
+}
+
+.okr-toggle.active span {
+  color: #667eea;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .okr-edit-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .okr-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full-width {
+    grid-column: auto;
+  }
+
+  .preview-context-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .view-cycle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .page {
+    padding: 15px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    gap: 15px;
+    flex-direction: column;
+  }
+
+  .filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .filters-bar select {
+    width: 100%;
+  }
+
+  .okr-modal-overlay {
+    padding: 10px;
+  }
+
+  .okr-modal,
+  .okr-view-modal {
+    max-height: 96vh;
+  }
+
+  .okr-stepper {
+    padding: 14px 15px;
+  }
+
+  .okr-step span {
+    display: none;
+  }
+
+  .step-line {
+    margin: 0 8px;
+  }
+
+  .okr-modal-body {
+    padding: 18px;
+  }
+
+  .context-summary-content {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .preview-context-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .view-cycle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+
+}

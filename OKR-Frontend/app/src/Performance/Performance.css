@@ -1,0 +1,524 @@
+/* =========================================================
+   PERFORMANCE ANALYTICS
+   Weekly batch-wise performance design
+========================================================= */
+
+.performance-page {
+    min-height: 100%;
+    padding: 22px 24px 30px;
+    background: var(--bg1);
+    color: var(--text);
+}
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.performance-page-header {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.performance-page-header h1 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.performance-breadcrumb {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text3);
+    font-size: 10px;
+}
+
+.performance-breadcrumb span {
+    color: var(--text3);
+}
+
+/* =========================================================
+   BATCH SELECTOR
+========================================================= */
+
+.performance-cycle-selector {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 34px;
+    padding: 5px 10px 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg2);
+    color: var(--text);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.performance-batch-label {
+    color: var(--text3);
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.performance-cycle-selector select {
+    min-width: 160px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.performance-cycle-selector select option {
+    background: var(--bg2);
+    color: var(--text);
+}
+
+/* =========================================================
+   VIEW TABS
+========================================================= */
+
+.performance-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+}
+
+.performance-tab {
+    position: relative;
+    border: 0;
+    background: transparent;
+    color: var(--text3);
+    padding: 10px 14px 11px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: default;
+}
+
+.performance-tab.active {
+    color: var(--accent);
+}
+
+.performance-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--accent);
+}
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.performance-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 294px;
+    gap: 16px;
+    align-items: start;
+}
+
+.performance-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.performance-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg2);
+    overflow: hidden;
+}
+
+.performance-card-header {
+    min-height: 54px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.performance-card-header h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.performance-card-header p {
+    margin: 3px 0 0;
+    color: var(--text3);
+    font-size: 9px;
+}
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.performance-card-body {
+    padding: 14px 16px 15px;
+}
+
+/* =========================================================
+   MAIN MULTI-SERIES GRAPH
+========================================================= */
+
+.performance-chart-wrapper {
+    width: 100%;
+    min-height: 320px;
+}
+
+.performance-chart {
+    width: 100%;
+    height: 320px;
+}
+
+.performance-chart svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+.chart-grid {
+    stroke: var(--border);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    opacity: 0.7;
+}
+
+.chart-y-label,
+.chart-x-label {
+    fill: var(--text3);
+    font-size: 9px;
+    font-family: inherit;
+}
+
+.performance-series-line {
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.performance-series-point {
+    stroke-width: 2;
+}
+
+/*
+ * Dynamic colors are supplied directly from
+ * Performance.jsx through inline styles.
+ *
+ * This allows more users than the previous
+ * fixed 8-color CSS implementation.
+ */
+
+/* =========================================================
+   GRAPH LEGEND
+========================================================= */
+
+.performance-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 3px;
+    padding-top: 2px;
+}
+
+.performance-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text3);
+    font-size: 9px;
+}
+
+.performance-legend-marker {
+    width: 8px;
+    height: 8px;
+    border-radius: 1px;
+    display: inline-block;
+}
+
+/* =========================================================
+   SCORE DISTRIBUTION
+========================================================= */
+
+.distribution-chart {
+    height: 164px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 12px;
+    padding: 10px 3px 0;
+}
+
+.distribution-column {
+    height: 100%;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.distribution-value-bar {
+    width: 42px;
+    max-width: 100%;
+    min-height: 22px;
+    border-radius: 3px 3px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5px;
+    color: #11131a;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.distribution-value-bar.gladiator {
+    background: #4f7dff;
+}
+
+.distribution-value-bar.platinum {
+    background: #a8b8d0;
+}
+
+.distribution-value-bar.gold {
+    background: #ffd166;
+}
+
+.distribution-value-bar.bronze {
+    background: #ff4f6a;
+}
+
+.distribution-label {
+    color: var(--text3);
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   QUICK STATS
+========================================================= */
+
+.quick-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.quick-stat {
+    min-height: 59px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    background: var(--bg3);
+    text-align: center;
+}
+
+.quick-stat strong {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.quick-stat span {
+    margin-top: 5px;
+    color: var(--text3);
+    font-size: 8px;
+}
+
+.quick-stat-green {
+    color: #22d39a;
+}
+
+.quick-stat-amber {
+    color: #f5a623;
+}
+
+.quick-stat-blue {
+    color: #4f7dff;
+}
+
+.quick-stat-platinum {
+    color: #a8b8d0;
+}
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.performance-state {
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text3);
+    font-size: 12px;
+}
+
+.performance-error {
+    margin-bottom: 16px;
+    min-height: 42px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 79, 106, 0.25);
+    border-radius: 8px;
+    background: rgba(255, 79, 106, 0.06);
+    color: #ff4f6a;
+    justify-content: flex-start;
+}
+
+/* =========================================================
+   EMPTY GRAPH
+========================================================= */
+
+.performance-chart-empty {
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--border);
+    border-radius: 7px;
+    color: var(--text3);
+    font-size: 11px;
+}
+
+/* =========================================================
+   GRAPH HORIZONTAL SCROLL CONTAINER
+========================================================= */
+
+.performance-chart-scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.performance-chart-scroll-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.performance-chart-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.performance-chart-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+}
+
+.performance-chart-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+    .performance-layout {
+        grid-template-columns:
+            minmax(0, 1fr) 270px;
+    }
+
+    .performance-cycle-selector select {
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 850px) {
+    .performance-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .performance-cycle-selector {
+        align-self: flex-start;
+    }
+
+    .performance-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .performance-right-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 620px) {
+    .performance-page {
+        padding: 18px 14px 24px;
+    }
+
+    .performance-page-header {
+        gap: 12px;
+    }
+
+    .performance-cycle-selector {
+        width: 100%;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    .performance-cycle-selector select {
+        min-width: 0;
+        flex: 1;
+        max-width: 220px;
+    }
+
+    .performance-right-column {
+        display: flex;
+    }
+
+    .performance-tabs {
+        overflow-x: auto;
+    }
+
+    .performance-tab {
+        white-space: nowrap;
+    }
+
+    .performance-chart-wrapper,
+    .performance-chart {
+        min-height: 260px;
+        height: 260px;
+    }
+
+    .performance-chart-empty {
+        height: 260px;
+    }
+
+    .performance-legend {
+        justify-content: flex-start;
+        gap: 10px 14px;
+    }
+}

@@ -1,0 +1,997 @@
+/* =========================================
+   Raise Query Page
+   ========================================= */
+
+.raise-query-page {
+    padding: 28px;
+    min-height: 100%;
+}
+
+.raise-query-layout {
+    display: grid;
+    grid-template-columns: minmax(360px, 0.9fr) minmax(500px, 1.5fr);
+    gap: 20px;
+    align-items: start;
+}
+
+/* =========================================
+   Raise Query Form
+   ========================================= */
+
+.raise-query-card {
+    position: sticky;
+    top: 24px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 16px);
+    background: var(--bg2);
+}
+
+.raise-query-header {
+    margin-bottom: 22px;
+}
+
+.raise-query-header h1 {
+    margin: 0 0 5px;
+    color: var(--text);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.raise-query-header p {
+    margin: 0;
+    color: var(--text3);
+    font-size: 12px;
+}
+
+.raise-query-form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    color: var(--text2);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius, 10px);
+    outline: none;
+    background: var(--bg3);
+    color: var(--text);
+    font-size: 12.5px;
+    font-family: var(--font-body, inherit);
+    transition: var(--trans, all 0.2s ease);
+}
+
+.form-group input {
+    height: 40px;
+}
+
+.form-group textarea {
+    min-height: 105px;
+    resize: vertical;
+    line-height: 1.55;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text3);
+}
+
+.form-group input:hover,
+.form-group textarea:hover,
+.form-group select:hover {
+    border-color: var(--border2);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--accent);
+    background: var(--bg4);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.query-error {
+    padding: 10px 12px;
+    border: 1px solid var(--red);
+    border-radius: var(--radius, 10px);
+    background: var(--red-bg);
+    color: var(--red);
+    font-size: 12px;
+}
+
+.raise-query-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 2px;
+}
+
+.query-clear-btn,
+.query-submit-btn {
+    height: 36px;
+    padding: 0 15px;
+    border-radius: var(--radius, 10px);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--trans, all 0.2s ease);
+}
+
+.query-clear-btn {
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+}
+
+.query-clear-btn:hover:not(:disabled) {
+    background: var(--bg3);
+    color: var(--text);
+}
+
+.query-submit-btn {
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #ffffff;
+}
+
+.query-submit-btn:hover:not(:disabled) {
+    background: var(--accent2);
+    border-color: var(--accent2);
+}
+
+.query-clear-btn:disabled,
+.query-submit-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* =========================================
+   My Queries Panel
+   ========================================= */
+
+.my-queries-panel {
+    height: calc(100vh - 190px);
+    min-height: 500px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   Query Statistics
+   ========================================= */
+
+.query-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.query-stat-card {
+    min-height: 72px;
+    padding: 15px 17px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 16px);
+    background: var(--bg2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.query-stat-label {
+    color: var(--text3);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.query-stat-value {
+    color: var(--text);
+    font-family: var(--font-display, inherit);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* =========================================
+   My Queries
+   ========================================= */
+
+.recent-queries-section {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 16px);
+    background: var(--bg2);
+    overflow: hidden;
+}
+
+.recent-queries-header {
+    padding: 17px 18px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.recent-queries-header h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.recent-queries-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+.recent-queries-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.recent-queries-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.recent-queries-list::-webkit-scrollbar-thumb {
+    background: var(--border2);
+    border-radius: 99px;
+}
+
+.recent-query-card {
+    padding: 14px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius, 10px);
+    background: var(--bg3);
+    cursor: pointer;
+    outline: none;
+    transition: var(--trans, all 0.2s ease);
+}
+
+.recent-query-card:last-child {
+    margin-bottom: 0;
+}
+
+.recent-query-card:hover {
+    border-color: var(--border2);
+    background: var(--bg4);
+}
+
+.recent-query-card:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.recent-query-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.recent-query-top h3 {
+    min-width: 0;
+    margin: 0;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.recent-query-message {
+    margin: 7px 0 8px;
+    color: var(--text2);
+    font-size: 11.5px;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.recent-query-meta {
+    margin: 0;
+    color: var(--text3);
+    font-size: 10.5px;
+}
+
+/* =========================================
+   Query Status
+   ========================================= */
+
+.query-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 4px 8px;
+    border-radius: 99px;
+    font-size: 9.5px;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.query-status.open {
+    background: var(--accent-glow);
+    color: var(--accent);
+}
+
+.query-status.in-progress {
+    background: var(--amber-bg);
+    color: var(--amber);
+}
+
+.query-status.reopened {
+    background: rgba(139, 92, 246, 0.12);
+    color: #8b5cf6;
+}
+
+.query-status.resolved,
+.query-status.completed,
+.query-status.closed {
+    background: var(--green-bg);
+    color: var(--green);
+}
+
+/* =========================================
+   Query Priority
+   ========================================= */
+
+.query-priority {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 4px 8px;
+    border-radius: 99px;
+    font-size: 9.5px;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.query-priority.low {
+    background: var(--bg4);
+    color: var(--text3);
+}
+
+.query-priority.medium {
+    background: var(--accent-glow);
+    color: var(--accent);
+}
+
+.query-priority.high {
+    background: var(--amber-bg);
+    color: var(--amber);
+}
+
+.query-priority.urgent {
+    background: var(--red-bg);
+    color: var(--red);
+}
+
+/* =========================================
+   Pagination
+   ========================================= */
+
+.query-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 11px 15px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.query-page-size {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text3);
+    font-size: 10.5px;
+}
+
+.query-page-size select {
+    height: 29px;
+    padding: 0 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius, 10px);
+    outline: none;
+    background: var(--bg3);
+    color: var(--text);
+    font-size: 10.5px;
+}
+
+.query-page-size select:hover {
+    border-color: var(--border2);
+}
+
+.query-page-size select:focus {
+    border-color: var(--accent);
+}
+
+.query-pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.query-pagination-controls button {
+    height: 29px;
+    padding: 0 11px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius, 10px);
+    background: var(--bg3);
+    color: var(--text2);
+    font-size: 10.5px;
+    cursor: pointer;
+    transition: var(--trans, all 0.2s ease);
+}
+
+.query-pagination-controls button:hover:not(:disabled) {
+    border-color: var(--border2);
+    background: var(--bg4);
+    color: var(--text);
+}
+
+.query-pagination-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.query-pagination-controls span {
+    min-width: 65px;
+    color: var(--text3);
+    font-size: 10.5px;
+    text-align: center;
+}
+
+/* =========================================
+   Query Details Modal
+   ========================================= */
+
+.query-details-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(3px);
+}
+
+.query-details-modal {
+    width: min(610px, 100%);
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-lg, 16px);
+    background: var(--bg2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.query-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.query-details-header h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.query-details-close {
+    width: 29px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius, 10px);
+    background: var(--bg3);
+    color: var(--text2);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--trans, all 0.2s ease);
+}
+
+.query-details-close:hover {
+    background: var(--bg4);
+    color: var(--text);
+}
+
+.query-details-body {
+    overflow-y: auto;
+    padding: 18px;
+}
+
+.query-details-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.query-details-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.query-details-body::-webkit-scrollbar-thumb {
+    background: var(--border2);
+    border-radius: 99px;
+}
+
+.query-details-status-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 14px;
+}
+
+/* =========================================
+   Subject + Message
+   ========================================= */
+
+.query-details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.query-detail-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius, 10px);
+    background: var(--bg3);
+}
+
+.query-detail-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text3);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.query-detail-box h3 {
+    margin: 0;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.query-message-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.query-details-message {
+    color: var(--text2);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* =========================================
+   Useful Query Information
+   ========================================= */
+
+.query-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.query-detail-field {
+    min-width: 0;
+    padding: 12px 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius, 10px);
+    background: var(--bg3);
+}
+
+.query-detail-field>label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text3);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.query-detail-field>span {
+    display: block;
+    color: var(--text2);
+    font-size: 11.5px;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* =========================================
+   Modal Loading / Error
+   ========================================= */
+
+.query-details-loading,
+.query-details-error {
+    padding: 35px 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.query-details-loading {
+    color: var(--text3);
+}
+
+.query-details-error {
+    color: var(--red);
+}
+
+/* =========================================
+   Modal Footer
+   ========================================= */
+
+.query-details-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 11px 18px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.query-details-close-btn {
+    height: 33px;
+    padding: 0 15px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius, 10px);
+    background: var(--bg3);
+    color: var(--text2);
+    font-size: 11.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--trans, all 0.2s ease);
+}
+
+.query-details-close-btn:hover {
+    background: var(--bg4);
+    color: var(--text);
+}
+
+/* =========================================
+   Browser Autofill
+   ========================================= */
+
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text);
+    -webkit-box-shadow: 0 0 0 1000px var(--bg3) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* =========================================
+   Responsive - Tablet
+   ========================================= */
+
+@media (max-width: 1100px) {
+    .raise-query-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .raise-query-card {
+        position: static;
+    }
+
+    .my-queries-panel {
+        height: 600px;
+        min-height: 0;
+    }
+}
+
+/* =========================================
+   Responsive - Mobile
+   ========================================= */
+
+@media (max-width: 600px) {
+    .raise-query-page {
+        padding: 14px;
+    }
+
+    .raise-query-card {
+        padding: 17px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 17px;
+    }
+
+    .query-stats {
+        gap: 7px;
+    }
+
+    .query-stat-card {
+        padding: 11px;
+    }
+
+    .query-stat-label {
+        font-size: 9px;
+    }
+
+    .query-stat-value {
+        font-size: 18px;
+    }
+
+    .recent-query-card {
+        padding: 12px;
+    }
+
+    .recent-query-top {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .query-pagination {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 9px;
+    }
+
+    .query-page-size {
+        justify-content: space-between;
+    }
+
+    .query-pagination-controls {
+        justify-content: space-between;
+    }
+
+    .query-details-overlay {
+        padding: 10px;
+    }
+
+    .query-details-modal {
+        max-height: calc(100vh - 20px);
+    }
+
+    .query-details-body {
+        padding: 15px;
+    }
+
+    .query-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .query-details-footer {
+        padding: 10px 15px;
+    }
+}
+
+/* =========================================
+   Dark Mode Form Controls Fix
+   ========================================= */
+
+/*
+ * The portal uses dark mode when data-theme is
+ * not set, and light mode when data-theme="light".
+ */
+
+.raise-query-page {
+    color-scheme: dark;
+}
+
+html[data-theme="light"] .raise-query-page {
+    color-scheme: light;
+}
+
+
+/* Force Raise Query form controls to use theme colors */
+
+.raise-query-page .raise-query-form .form-group input,
+.raise-query-page .raise-query-form .form-group textarea,
+.raise-query-page .raise-query-form .form-group select {
+    background-color: var(--bg3) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+}
+
+
+/* Placeholder */
+
+.raise-query-page .raise-query-form .form-group input::placeholder,
+.raise-query-page .raise-query-form .form-group textarea::placeholder {
+    color: var(--text3) !important;
+}
+
+
+/* Focus */
+
+.raise-query-page .raise-query-form .form-group input:focus,
+.raise-query-page .raise-query-form .form-group textarea:focus,
+.raise-query-page .raise-query-form .form-group select:focus {
+    background-color: var(--bg4) !important;
+    color: var(--text) !important;
+    border-color: var(--accent) !important;
+}
+
+
+/* Select dropdown */
+
+.raise-query-page .raise-query-form .form-group select option {
+    background-color: var(--bg3);
+    color: var(--text);
+}
+
+
+/* =========================================
+   Dark Mode Autofill
+   ========================================= */
+
+.raise-query-page .raise-query-form .form-group input:-webkit-autofill,
+.raise-query-page .raise-query-form .form-group input:-webkit-autofill:hover,
+.raise-query-page .raise-query-form .form-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text) !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--bg3) inset !important;
+    box-shadow: 0 0 0 1000px var(--bg3) inset !important;
+}
+
+
+/* =========================================
+   Light Mode
+   ========================================= */
+
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group input,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group textarea,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group select {
+    background-color: var(--bg3) !important;
+    color: var(--text) !important;
+}
+
+
+/* Light mode focus */
+
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group input:focus,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group textarea:focus,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group select:focus {
+    background-color: var(--bg4) !important;
+}
+
+/* =========================================
+   Dark Mode Form Controls Fix
+   ========================================= */
+
+/*
+ * The portal uses dark mode when data-theme is
+ * not set, and light mode when data-theme="light".
+ */
+
+.raise-query-page {
+    color-scheme: dark;
+}
+
+html[data-theme="light"] .raise-query-page {
+    color-scheme: light;
+}
+
+
+/* Force Raise Query form controls to use theme colors */
+
+.raise-query-page .raise-query-form .form-group input,
+.raise-query-page .raise-query-form .form-group textarea,
+.raise-query-page .raise-query-form .form-group select {
+    background-color: var(--bg3) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+}
+
+
+/* Placeholder */
+
+.raise-query-page .raise-query-form .form-group input::placeholder,
+.raise-query-page .raise-query-form .form-group textarea::placeholder {
+    color: var(--text3) !important;
+}
+
+
+/* Focus */
+
+.raise-query-page .raise-query-form .form-group input:focus,
+.raise-query-page .raise-query-form .form-group textarea:focus,
+.raise-query-page .raise-query-form .form-group select:focus {
+    background-color: var(--bg4) !important;
+    color: var(--text) !important;
+    border-color: var(--accent) !important;
+}
+
+
+/* Select dropdown */
+
+.raise-query-page .raise-query-form .form-group select option {
+    background-color: var(--bg3);
+    color: var(--text);
+}
+
+
+/* =========================================
+   Dark Mode Autofill
+   ========================================= */
+
+.raise-query-page .raise-query-form .form-group input:-webkit-autofill,
+.raise-query-page .raise-query-form .form-group input:-webkit-autofill:hover,
+.raise-query-page .raise-query-form .form-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text) !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--bg3) inset !important;
+    box-shadow: 0 0 0 1000px var(--bg3) inset !important;
+}
+
+
+/* =========================================
+   Light Mode
+   ========================================= */
+
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group input,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group textarea,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group select {
+    background-color: var(--bg3) !important;
+    color: var(--text) !important;
+}
+
+
+/* Light mode focus */
+
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group input:focus,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group textarea:focus,
+html[data-theme="light"] .raise-query-page .raise-query-form .form-group select:focus {
+    background-color: var(--bg4) !important;
+}

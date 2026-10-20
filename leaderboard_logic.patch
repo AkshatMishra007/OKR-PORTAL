@@ -1,0 +1,299 @@
+--- a/app/leaderboard/repository.py
++++ b/app/leaderboard/repository.py
+@@ -6,19 +6,31 @@
+ from app.organization_members.models import OrganizationMember
+ 
+ 
++def get_organization_members(
++    db: Session,
++    organization_id: UUID,
++) -> list[OrganizationMember]:
++    """Return every active, non-deleted member of an organization."""
++    return (
++        db.query(OrganizationMember)
++        .filter(
++            OrganizationMember.organization_id == organization_id,
++            OrganizationMember.is_deleted.is_(False),
++            OrganizationMember.is_active.is_(True),
++        )
++        .options(
++            joinedload(OrganizationMember.user),
++            joinedload(OrganizationMember.organization),
++        )
++        .all()
++    )
++
++
+ def get_organization_okrs(
+     db: Session,
+     organization_id: UUID,
+-):
+-    """
+-    Get active OKRs belonging to active members of an organization.
+-
+-    The relationship is:
+-        OrganizationMember -> User
+-        OrganizationMember -> OKR
+-        OKR -> WeeklyUpdate
+-    """
+-
++) -> list[OKR]:
++    """Get non-deleted OKRs assigned to active members of an organization."""
+     return (
+         db.query(OKR)
+         .join(
+@@ -32,12 +44,8 @@
+             OKR.is_deleted.is_(False),
+         )
+         .options(
+-            joinedload(OKR.assignee).joinedload(
+-                OrganizationMember.user
+-            ),
+-            joinedload(OKR.assignee).joinedload(
+-                OrganizationMember.organization
+-            ),
++            joinedload(OKR.assignee).joinedload(OrganizationMember.user),
++            joinedload(OKR.assignee).joinedload(OrganizationMember.organization),
+             selectinload(OKR.weekly_updates),
+         )
+         .all()
+@@ -47,11 +55,8 @@
+ def get_user_organization(
+     db: Session,
+     user_id: UUID,
+-):
+-    """
+-    Get an active organization membership for the current user.
+-    """
+-
++) -> OrganizationMember | None:
++    """Get an active organization membership for the current user."""
+     return (
+         db.query(OrganizationMember)
+         .filter(
+@@ -61,4 +66,4 @@
+         )
+         .order_by(OrganizationMember.joined_at.desc())
+         .first()
+-    )+    )
+--- a/app/leaderboard/service.py
++++ b/app/leaderboard/service.py
+@@ -5,6 +5,7 @@
+ from sqlalchemy.orm import Session
+ 
+ from app.leaderboard.repository import (
++    get_organization_members,
+     get_organization_okrs,
+     get_user_organization,
+ )
+@@ -14,61 +15,26 @@
+     LeaderboardResponse,
+     MyRankResponse,
+ )
++from app.my_okr.service import _enrich_okrs_bulk
+ 
+ 
+ def get_award(score: float) -> str:
+-    """
+-    Determine the award based on the leaderboard score.
+-    """
+-
++    """Determine the award tier from a 0–100 leaderboard score."""
+     if score >= 90:
+         return "Gladiator"
+-
+     if score >= 80:
+         return "Platinum"
+-
+     if score >= 60:
+         return "Gold"
+-
+     return "Bronze"
+-
+-
+-def get_latest_progress(okr) -> float:
+-    """
+-    Return the latest non-deleted weekly progress for an OKR.
+-    If no valid weekly update exists, return 0.
+-    """
+-    valid_updates = [
+-        update
+-        for update in (okr.weekly_updates or [])
+-        if not getattr(update, "is_deleted", False)
+-    ]
+-    if not valid_updates:
+-        return 0.0
+-
+-    latest_update = max(
+-        valid_updates,
+-        key=lambda update: (
+-            update.week_number,
+-            update.created_at,
+-        ),
+-    )
+-
+-    return float(
+-        max(0, min(100, latest_update.progress or 0))
+-    )
+ 
+ 
+ def get_leaderboard_service(
+     db: Session,
+     current_user_id: UUID,
+ ) -> LeaderboardResponse:
+-
+-    membership = get_user_organization(
+-        db=db,
+-        user_id=current_user_id,
+-    )
+-
++    """Build one organization-wide leaderboard using Team OKR progress."""
++    membership = get_user_organization(db=db, user_id=current_user_id)
+     if not membership:
+         raise HTTPException(
+             status_code=status.HTTP_404_NOT_FOUND,
+@@ -76,86 +42,77 @@
+         )
+ 
+     organization_id = membership.organization_id
++    members = get_organization_members(db=db, organization_id=organization_id)
++    okrs = get_organization_okrs(db=db, organization_id=organization_id)
+ 
+-    okrs = get_organization_okrs(
+-        db=db,
+-        organization_id=organization_id,
+-    )
++    # Use the same tracker-derived progress calculation as My OKR / Team OKR.
++    _enrich_okrs_bulk(db=db, okrs=okrs)
+ 
+-    # Collect OKR scores user-wise.
+-    user_scores = defaultdict(list)
+-    user_details = {}
++    # Seed every active organization member so members without OKRs score 0.
++    user_scores: dict[UUID, list[float]] = defaultdict(list)
++    user_details: dict[UUID, dict[str, str]] = {}
++
++    for member in members:
++        user = member.user
++        if not user or getattr(user, "is_deleted", False):
++            continue
++        user_scores[user.id]  # initialize with no OKRs -> score 0
++        user_details[user.id] = {
++            "name": (getattr(user, "name", None) or "").strip() or "Unknown User",
++            "team": getattr(member, "organization_name", None) or "",
++        }
+ 
+     for okr in okrs:
+         member = okr.assignee
+-
+-        if not member or not member.user:
++        user = member.user if member else None
++        if not user or user.id not in user_details:
+             continue
+ 
+-        user = member.user
++        raw_score = getattr(okr, "display_progress_percentage", 0.0) or 0.0
++        try:
++            score = float(raw_score)
++        except (TypeError, ValueError):
++            score = 0.0
+ 
+-        score = get_latest_progress(okr)
+-
+-        user_scores[user.id].append(score)
+-
+-        user_details[user.id] = {
+-            "name": user.name,
+-            "team": member.organization_name or "",
+-        }
++        # A completed OKR contributes at most 100% to the leaderboard.
++        user_scores[user.id].append(max(0.0, min(100.0, score)))
+ 
+     leaderboard_data = []
+-
+     for user_id, scores in user_scores.items():
+-        if not scores:
+-            continue
+-
+-        average_score = sum(scores) / len(scores)
+-
+-        average_score = round(
+-            max(0, min(100, average_score)),
+-            2,
+-        )
+-
+-        award = get_award(average_score)
+-
++        average_score = sum(scores) / len(scores) if scores else 0.0
++        average_score = round(max(0.0, min(100.0, average_score)), 2)
+         leaderboard_data.append(
+             {
+                 "user_id": user_id,
+                 "name": user_details[user_id]["name"],
+                 "team": user_details[user_id]["team"],
+                 "score": average_score,
+-                "award": award,
++                "award": get_award(average_score),
+             }
+         )
+ 
+-    # Highest score first.
++    # Deterministic ordering: score descending, then case-insensitive name, then ID.
+     leaderboard_data.sort(
+         key=lambda item: (
+             -item["score"],
+-            item["name"].lower(),
++            item["name"].casefold(),
++            str(item["user_id"]),
+         )
+     )
+ 
+-    items = []
++    items = [
++        LeaderboardItem(
++            rank=index,
++            user_id=item["user_id"],
++            name=item["name"],
++            team=item["team"],
++            score=item["score"],
++            award=item["award"],
++        )
++        for index, item in enumerate(leaderboard_data, start=1)
++    ]
+ 
+-    for index, item in enumerate(
+-        leaderboard_data,
+-        start=1,
+-    ):
+-        items.append(
+-            LeaderboardItem(
+-                rank=index,
+-                user_id=item["user_id"],
+-                name=item["name"],
+-                team=item["team"],
+-                score=item["score"],
+-                award=item["award"],
+-            )
+-        )
+-
+-    # Find current user's rank.
+     my_rank = MyRankResponse()
+-
+     for item in items:
+         if item.user_id == current_user_id:
+             my_rank = MyRankResponse(
+@@ -165,9 +122,7 @@
+             )
+             break
+ 
+-    # Calculate award distribution.
+     distribution = AwardDistribution()
+-
+     for item in items:
+         if item.award == "Gladiator":
+             distribution.gladiator += 1
+@@ -182,4 +137,4 @@
+         items=items,
+         my_rank=my_rank,
+         award_distribution=distribution,
+-    )+    )

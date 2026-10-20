@@ -1,0 +1,585 @@
+/* =========================================================
+   TEAM OKR CONTAINER
+========================================================= */
+
+.team-okr-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.team-okr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.team-okr-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.team-okr-header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--text-secondary, #999);
+}
+
+
+/* =========================================================
+   FILTER CARD
+========================================================= */
+
+.team-okr-filter-card {
+  background: var(--card-bg, #1e1e1e);
+  border: 1px solid var(--border-color, #333);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.team-okr-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+}
+
+.team-okr-filter-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #fff);
+}
+
+.team-okr-filter-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #444);
+  background: var(--input-bg, #151515);
+  color: var(--text-primary, #fff);
+  outline: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.team-okr-filter-group select:focus {
+  border-color: #666;
+}
+
+
+/* =========================================================
+   SELECTED BATCH INFORMATION
+========================================================= */
+
+.selected-batch-info {
+  display: flex;
+  gap: 25px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color, #333);
+  flex-wrap: wrap;
+}
+
+.selected-batch-info span {
+  font-size: 13px;
+  color: var(--text-secondary, #aaa);
+}
+
+.selected-batch-info strong {
+  color: var(--text-primary, #fff);
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.team-okr-error {
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background: rgba(220, 53, 69, 0.12);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.team-okr-table-card {
+  background: var(--card-bg, #1e1e1e);
+  border: 1px solid var(--border-color, #333);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.team-okr-table-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border-color, #333);
+}
+
+.team-okr-table-header > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-okr-table-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.team-okr-table-header span {
+  font-size: 12px;
+  color: var(--text-secondary, #999);
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.team-okr-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.team-okr-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+}
+
+.team-okr-table thead {
+  background: var(--table-header-bg, #181818);
+}
+
+.team-okr-table th {
+  padding: 13px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #aaa);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.team-okr-table td {
+  padding: 15px 16px;
+  border-top: 1px solid var(--border-color, #2f2f2f);
+  font-size: 14px;
+  color: var(--text-primary, #eee);
+}
+
+.team-okr-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.team-okr-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.team-okr-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 18px 20px;
+}
+
+.team-okr-pagination-size,
+.team-okr-pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-okr-pagination-size,
+.team-okr-pagination-pages span {
+  color: var(--text-secondary, #999);
+  font-size: 12px;
+}
+
+.team-okr-pagination select,
+.team-okr-pagination button {
+  padding: 7px 10px;
+  border: 1px solid var(--border-color, #333);
+  border-radius: 6px;
+  background: var(--bg2);
+  color: var(--text);
+  font-size: 12px;
+}
+
+.team-okr-pagination button {
+  cursor: pointer;
+}
+
+.team-okr-pagination button:hover:not(:disabled) {
+  border-color: var(--accent, #666);
+}
+
+.team-okr-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+
+/* =========================================================
+   OBJECTIVE
+========================================================= */
+
+.team-objective-cell {
+  min-width: 250px;
+}
+
+.team-objective-title {
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary, #fff);
+}
+
+.team-objective-user {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--text-secondary, #888);
+}
+
+
+/* =========================================================
+   TARGET
+========================================================= */
+
+.team-target-value {
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   OKR TYPE
+========================================================= */
+
+.team-okr-type {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.team-progress-container {
+  width: 150px;
+}
+
+.team-progress-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.team-progress-top span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.team-progress-bar {
+  width: 100%;
+  height: 7px;
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.team-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+
+/* 0 - 60 */
+
+.team-progress-red {
+  background: #dc3545;
+}
+
+
+/* 60 - 80 */
+
+.team-progress-yellow {
+  background: #ffc107;
+}
+
+
+/* 80 - 100 */
+
+.team-progress-green {
+  background: #28a745;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.team-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.team-status-good {
+  background: rgba(40, 167, 69, 0.12);
+  color: #4ade80;
+}
+
+.team-status-warning {
+  background: rgba(255, 193, 7, 0.12);
+  color: #facc15;
+}
+
+.team-status-danger {
+  background: rgba(220, 53, 69, 0.12);
+  color: #ff6b6b;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.team-okr-loading {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, #999);
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.team-okr-empty {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.team-okr-empty-icon {
+  font-size: 35px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.team-okr-empty h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.team-okr-empty p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary, #888);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .team-okr-container {
+    padding: 12px;
+  }
+
+  .team-okr-header h2 {
+    font-size: 20px;
+  }
+
+  .selected-batch-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+}
+
+/* =====================================================
+   TEAM OKR OBJECTIVE
+===================================================== */
+
+.team-objective {
+  max-width: 350px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   OKR TYPE
+===================================================== */
+
+.okr-type-badge {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   TEAM PROGRESS
+===================================================== */
+
+.team-progress {
+  width: 150px;
+}
+
+.team-progress-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.team-progress-header span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.team-progress-bar {
+  width: 100%;
+  height: 7px;
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.team-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+
+/* =====================================================
+   PROGRESS COLORS
+===================================================== */
+
+.progress-red {
+  background: #dc3545;
+}
+
+.progress-yellow {
+  background: #ffc107;
+}
+
+.progress-green {
+  background: #28a745;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.status-danger {
+  background: rgba(220, 53, 69, 0.12);
+  color: #ff6b6b;
+}
+
+.status-warning {
+  background: rgba(255, 193, 7, 0.12);
+  color: #facc15;
+}
+
+.status-success {
+  background: rgba(40, 167, 69, 0.12);
+  color: #4ade80;
+}
+
+
+/* =====================================================
+   NO DATA
+===================================================== */
+
+.no-data {
+  text-align: center;
+  padding: 40px !important;
+  color: var(--text-secondary, #999);
+}

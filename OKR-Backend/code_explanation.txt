@@ -1,0 +1,267 @@
+===============================================================================
+OKR-BACKEND - LINE-BY-LINE CODEFILE EXPLANATION
+===============================================================================
+
+1. app/main.py
+-------------------------------------------------------------------------------
+Line 1: Imports FastAPI framework.
+Line 2: Imports CORSMiddleware for handling cross-origin HTTP requests.
+Line 4: Imports database Base metadata and engine from app.core.database.
+Line 6: Imports auth router as auth_router.
+Line 7: Imports users router as users_router.
+Line 8: Imports organizations router as organizations_router.
+Line 9: Imports organization_members router as organization_members_router.
+Line 13: Base.metadata.create_all(bind=engine): Auto-creates database tables if they do not exist.
+Line 16-20: Instantiates FastAPI app with title "OKR Backend API", root path "/api", and redirect_slashes disabled.
+Line 23-31: Configures CORS middleware allowing origin http://localhost:3000 with credentials, all methods (*), and all headers (*).
+Line 34-37: Registers auth_router, users_router, organizations_router, and organization_members_router with the app.
+Line 41-46: Endpoint GET "/": Returns JSON {"success": True, "message": "OKR Backend Running"}.
+Line 48-53: Endpoint GET "home/": Returns JSON {"success": True, "message": "Home app"}.
+
+-------------------------------------------------------------------------------
+2. app/core/config.py
+-------------------------------------------------------------------------------
+Line 1: Imports BaseSettings and SettingsConfigDict from pydantic_settings.
+Line 4: Defines Settings class inheriting from BaseSettings.
+Line 6: SECRET_KEY (str): Required environment secret for signing JWTs.
+Line 8: ALGORITHM (str): Signature algorithm, defaults to "HS256".
+Line 10: ACCESS_TOKEN_EXPIRE_MINUTES (int): Lifetime of access token, defaults to 30 min.
+Line 12: REFRESH_TOKEN_EXPIRE_DAYS (int): Lifetime of refresh token, defaults to 7 days.
+Line 14-17: Configures Pydantic to read from ".env" file and ignore extra unknown env variables.
+Line 20: Instantiates global settings singleton object.
+
+-------------------------------------------------------------------------------
+3. app/core/database.py
+-------------------------------------------------------------------------------
+Line 1-4: Imports create_engine, declarative_base, sessionmaker from SQLAlchemy, load_dotenv, and os.
+Line 9: Calls load_dotenv() to load environment variables from .env file.
+Line 14-17: Retrieves DATABASE_URL from env or defaults to local PostgreSQL instance.
+Line 22-26: Creates engine with query echo enabled and pool_pre_ping for connection health checking.
+Line 31: Base = declarative_base(): Defines base ORM class for model definitions.
+Line 36-40: SessionLocal = sessionmaker(...): Factory creating new DB sessions with autocommit/autoflush disabled.
+Line 47-52: get_db(): Dependency generator that yields a database session and ensures it closes after request completion.
+
+-------------------------------------------------------------------------------
+4. app/core/security.py
+-------------------------------------------------------------------------------
+Line 14-18: Imports datetime, JWT error/jwt utilities from jose, and settings.
+Line 21-43: create_access_token(payload): Adds 30-min expiration & token_type="access" to payload and encodes signed JWT.
+Line 46-68: create_refresh_token(payload): Adds 7-day expiration & token_type="refresh" to payload and encodes signed JWT.
+Line 71-87: decode_token(token): Decodes JWT string using secret key and algorithm; raises ValueError if invalid or expired.
+Line 89-102: verify_token_type(payload, expected_type): Verifies token_type claim matches expected type; raises ValueError if mismatched.
+
+-------------------------------------------------------------------------------
+5. app/common/exceptions.py
+-------------------------------------------------------------------------------
+Line 9-20: AppException: Base application exception class initializing error message.
+Line 28-33: UserAlreadyExistsException: Raised when a username or email is already taken.
+Line 36-41: UserNotFoundException: Raised when a user account cannot be found.
+Line 44-49: InvalidCredentialsException: Raised when user authentication fails.
+Line 57-58: OrganizationAlreadyExistsException: Raised when organization already exists.
+Line 61-62: OrganizationNotFoundException: Raised when organization is missing.
+Line 70-71: UnauthorizedException: Raised when request lacks authentication.
+Line 74-75: ForbiddenException: Raised when user lacks access permissions.
+
+-------------------------------------------------------------------------------
+6. app/common/models.py
+-------------------------------------------------------------------------------
+Line 1-5: Imports uuid, datetime, SQLAlchemy Column, Boolean, DateTime, and PostgreSQL UUID dialect.
+Line 8-15: UUIDMixin: Mixin providing auto-generated UUID v4 primary key column `id`.
+Line 18-40: AuditModel: Mixin providing created_at, updated_at, created_by, and updated_by columns.
+Line 43-60: SoftDeleteModel: Mixin providing soft deletion columns: is_active (bool), is_deleted (bool), and deleted_at (datetime).
+Line 62-70: BaseModel: Combined base class inheriting from UUIDMixin, AuditModel, and SoftDeleteModel.
+
+-------------------------------------------------------------------------------
+7. app/common/schemas.py
+-------------------------------------------------------------------------------
+Line 11-16: Imports typing Generic/TypeVar, and Pydantic BaseModel/Field.
+Line 24-31: PaginationResponse: Schema holding pagination metadata (page, size, total).
+Line 39-46: ErrorDetail: Holds field name and validation message.
+Line 50-60: ErrorResponse: Standardized API error schema returning success=False, message, and error details list.
+Line 67-90: ResponseSchema[T]: Generic success response wrapper with success status, message, data payload, and optional pagination.
+
+-------------------------------------------------------------------------------
+8. app/auth/dependencies.py
+-------------------------------------------------------------------------------
+Line 15-19: Imports typing, FastAPI Depends/HTTPException/status, OAuth2PasswordBearer, and JWTError.
+Line 21-25: Imports ACCESS_TOKEN_TYPE, decode_token, and verify_token_type from app.auth.jwt.
+Line 27-29: oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login"): Extracts Bearer token from headers.
+Line 32-74: get_current_user(token): Dependency function that decodes token, checks token_type=="access" and sub claim; returns claims dict or raises 401 HTTP exception.
+
+-------------------------------------------------------------------------------
+9. app/auth/jwt.py
+-------------------------------------------------------------------------------
+Line 13-19: Imports datetime, timedelta, timezone, uuid4, jose jwt, and settings.
+Line 21-22: Defines constants ACCESS_TOKEN_TYPE="access" and REFRESH_TOKEN_TYPE="refresh".
+Line 25-59: _create_token(claims, expires_delta, token_type): Low-level generator adding iat, exp, jti UUID, and token_type to claims before encoding.
+Line 62-75: create_access_token(claims): Creates access token with ACCESS_TOKEN_EXPIRE_MINUTES lifetime.
+Line 78-91: create_refresh_token(claims): Creates refresh token with REFRESH_TOKEN_EXPIRE_DAYS lifetime.
+Line 94-108: decode_token(token): Decodes and validates JWT string against secret key.
+Line 111-125: verify_token_type(claims, expected_type): Validates token_type claim matches expected type; raises ValueError if mismatched.
+
+-------------------------------------------------------------------------------
+10. app/auth/password.py
+-------------------------------------------------------------------------------
+Line 1-6: Initializes CryptContext configured with bcrypt algorithm.
+Line 9-10: hash_password(password): Hashes plain-text password using bcrypt algorithm.
+Line 13-23: verify_password(plain_password, hashed_password): Verifies plain-text password against bcrypt hash; returns True if match, False otherwise.
+
+-------------------------------------------------------------------------------
+11. app/auth/router.py
+-------------------------------------------------------------------------------
+Line 1-6: Imports APIRouter, Depends, LoginRequest, LoginResponse, login_service, get_current_user, User model.
+Line 9: Instantiates router with prefix="/auth" and tag "Authentication".
+Line 12-14: POST "/login": Endpoint delegating login handling to login_service.
+Line 22-30: GET "/me": Protected endpoint returning current user id, email, and username.
+
+-------------------------------------------------------------------------------
+12. app/auth/schemas.py
+-------------------------------------------------------------------------------
+Line 4-5: LoginRequest: Pydantic input schema expecting access_token string.
+Line 8-10: TokenResponse: Response schema with access_token and refresh_token strings.
+Line 13-15: LoginResponse: Response schema with access_token and refresh_token strings.
+
+-------------------------------------------------------------------------------
+13. app/auth/service.py
+-------------------------------------------------------------------------------
+Line 4-13: login_service(login_data): Mock auth service returning temporary placeholder access and refresh tokens.
+
+-------------------------------------------------------------------------------
+14. app/users/models.py
+-------------------------------------------------------------------------------
+Line 1-4: Imports SQLAlchemy column types, Base, and BaseModel.
+Line 7-8: User(Base, BaseModel): User model table definition inheriting common mixins.
+Line 8: Table name set to "users".
+Line 10-15: username: Unique string(100), indexed, required.
+Line 17-22: email: Unique string(255), indexed, required.
+Line 24-27: password_hash: String storing bcrypt password hash.
+Line 29-32: first_name: String(100), required.
+Line 34-37: last_name: Optional String(100).
+Line 39-42: phone: Optional String(20).
+Line 44-47: designation: Optional String(100).
+Line 49-52: description: Optional Text for user details.
+Line 54-57: last_login: Optional DateTime recording last login timestamp.
+
+-------------------------------------------------------------------------------
+15. app/users/schemas.py
+-------------------------------------------------------------------------------
+Line 21-54: UserBase: Shared base schema for user attributes.
+Line 63-98: UserCreate: Input validation schema for user registration (validates password length 8-72).
+Line 104-134: UserUpdate: Input schema for updating user profile fields.
+Line 140-176: UserResponse: Complete output schema including id, email, timestamps, and ORM mode enabled.
+Line 182-208: UserListItem: Compact summary schema for list operations.
+Line 214-226: UserListResponse: Paginated list wrapper containing list of UserListItem objects.
+Line 232-240: UserProfileResponse: Subclass of UserResponse for user profile endpoints.
+
+-------------------------------------------------------------------------------
+16. app/users/service.py
+-------------------------------------------------------------------------------
+Line 23-58: create_user_service(db, user_data): Service function executing user registration workflow.
+Line 64-76: Checks database for existing user with duplicate username; raises UserAlreadyExistsException if found.
+Line 83-95: Checks database for existing user with duplicate email; raises UserAlreadyExistsException if found.
+Line 102-104: Hashes password using bcrypt.
+Line 111-120: Creates new User ORM object instance with provided data and password hash.
+Line 127-132: Persists user object into database, commits transaction, and refreshes object attributes.
+Line 134: Returns created User ORM object.
+
+-------------------------------------------------------------------------------
+17. app/users/router.py
+-------------------------------------------------------------------------------
+Line 18-21: Configures user router with prefix="/users" and tag "Users".
+Line 24-40: POST "/": Endpoint accepting UserCreate schema, invoking create_user_service, and returning HTTP 201 Created with UserResponse.
+
+-------------------------------------------------------------------------------
+18. app/organizations/router.py
+-------------------------------------------------------------------------------
+Line 3-6: Configures organizations router with prefix="/organizations".
+
+-------------------------------------------------------------------------------
+19. app/organization_members/router.py
+-------------------------------------------------------------------------------
+Line 3-6: Configures organization members router with prefix="/organizations".
+
+-------------------------------------------------------------------------------
+20. app/tests/conftest.py
+-------------------------------------------------------------------------------
+Line 11-25: Configures test database connection URL ("okr_test") and creates sessionmaker factory.
+Line 28-45: db_session(): Pytest fixture creating all database tables before test execution, yielding test session, and dropping tables afterwards.
+
+-------------------------------------------------------------------------------
+21. app/tests/generate_token.py
+-------------------------------------------------------------------------------
+Line 4-11: Creates sample access token for testing and prints generated token string to terminal.
+
+-------------------------------------------------------------------------------
+22. app/tests/test_common_models.py
+-------------------------------------------------------------------------------
+Line 13-22: create_test_user(): Helper constructing test User instance.
+Line 25-36: test_uuid_generated(): Tests automatic UUID primary key generation.
+Line 38-67: test_uuid_is_unique(): Tests that every record gets a distinct UUID.
+Line 69-81: test_created_at_updated_at_generated(): Tests automatic timestamp generation on creation.
+Line 83-95: test_created_by_updated_by_default_none(): Tests audit user fields default to None.
+Line 97-110: test_soft_delete_defaults(): Tests default soft delete flags (is_active=True, is_deleted=False).
+Line 112-129: test_soft_delete_update(): Tests toggling soft deletion flags.
+Line 131-147: test_updated_at_changes_on_update(): Tests updated_at timestamp modification on record change.
+
+-------------------------------------------------------------------------------
+23. app/tests/test_dependencies.py
+-------------------------------------------------------------------------------
+Line 15-32: test_get_current_user_success(): Tests valid access token returns claims.
+Line 34-44: test_get_current_user_invalid_token(): Tests invalid token raises HTTP 401.
+Line 46-62: test_get_current_user_refresh_token(): Tests using refresh token for auth raises HTTP 401.
+Line 64-78: test_get_current_user_missing_sub(): Tests missing subject claim raises HTTP 401.
+
+-------------------------------------------------------------------------------
+24. app/tests/test_jwt.py
+-------------------------------------------------------------------------------
+Line 9-19: test_create_access_token(): Tests access token generation.
+Line 21-34: test_decode_access_token(): Tests access token payload decoding.
+Line 36-47: test_refresh_token(): Tests refresh token generation and decoding.
+Line 49-59: test_verify_token_type(): Tests token type verification function.
+
+-------------------------------------------------------------------------------
+25. app/tests/test_password.py
+-------------------------------------------------------------------------------
+Line 7-14: test_password_hashing(): Tests password hashing returns modified hash string.
+Line 16-28: test_password_verification_success(): Tests successful password verification against hash.
+Line 30-43: test_password_verification_failure(): Tests incorrect password verification returns False.
+
+-------------------------------------------------------------------------------
+26. app/tests/test_security.py
+-------------------------------------------------------------------------------
+Line 9-40: test_jwt_flow(): End-to-end integration test of security token generation, decoding, and type verification.
+
+-------------------------------------------------------------------------------
+27. app/tests/test_user_schema.py
+-------------------------------------------------------------------------------
+Line 21-38: test_user_create_valid_data(): Tests valid registration payload passes schema validation.
+Line 40-53: test_user_create_invalid_email(): Tests invalid email fails schema validation.
+Line 55-68: test_user_create_short_username(): Tests short username fails schema validation.
+Line 70-83: test_user_create_short_password(): Tests short password (<8 chars) fails schema validation.
+Line 85-100: test_user_create_optional_fields(): Tests optional fields accept None.
+Line 107-118: test_user_update_partial_data(): Tests partial updates via UserUpdate schema.
+Line 120-129: test_user_update_empty_data(): Tests empty UserUpdate payload.
+Line 136-157: test_user_response_fields(): Tests UserResponse field mapping.
+Line 159-175: test_user_list_item_fields(): Tests UserListItem field mapping.
+
+-------------------------------------------------------------------------------
+28. app/tests/test_user_service.py
+-------------------------------------------------------------------------------
+Line 19-28: create_test_user_data(): Helper generating valid UserCreate payload.
+Line 36-51: test_create_user_success(): Tests successful user creation via user service.
+Line 53-70: test_password_is_hashed(): Tests password is saved as hash and verifies correctly.
+Line 78-103: test_duplicate_username(): Tests duplicate username raises UserAlreadyExistsException.
+Line 105-128: test_duplicate_email(): Tests duplicate email raises UserAlreadyExistsException.
+
+-------------------------------------------------------------------------------
+29. app/requirements.txt
+-------------------------------------------------------------------------------
+Line 1-2: Pinned dependencies for FastAPI framework and Uvicorn server.
+Line 4-6: Database ORM dependencies: SQLAlchemy, Alembic, psycopg2-binary driver.
+Line 8-10: Validation & settings: Pydantic, pydantic-settings, email-validator.
+Line 12-14: Security dependencies: python-jose (JWT), passlib (hashing), bcrypt.
+Line 16-17: Authentication & requests: MSAL and Requests.
+Line 19-20: Utilities: python-dotenv and python-multipart.
+Line 22-24: Testing framework: Pytest, pytest-asyncio, HTTPX.
+Line 26-28: Code formatting & linting: Black, Isort, Flake8.
+===============================================================================

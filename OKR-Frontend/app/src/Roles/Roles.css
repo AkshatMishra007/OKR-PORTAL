@@ -1,0 +1,609 @@
+/* =========================================================
+   ROLES PAGE
+========================================================= */
+
+
+/* ─── PAGE ─── */
+
+.page {
+  width: 100%;
+}
+
+
+/* ─── FILTERS ─── */
+
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  padding: 7px 12px 7px 34px;
+
+  color: var(--text);
+  font-size: 12.5px;
+
+  outline: none;
+
+  transition: var(--trans);
+}
+
+.search-input::placeholder {
+  color: var(--text3);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+.search-input:hover {
+  border-color: var(--border2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  pointer-events: none;
+}
+
+.search-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+
+/* ─── CARD ─── */
+
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--border);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+.role-count {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--text3);
+}
+
+
+/* ─── BUTTONS ─── */
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 14px;
+
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+
+  background: var(--accent);
+  color: white;
+
+  font-size: 11.5px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: var(--trans);
+}
+
+.primary-btn:hover {
+  background: var(--accent2);
+  border-color: var(--accent2);
+}
+
+
+/* ─── TABLE ─── */
+
+.role-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.role-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+}
+
+.role-table th {
+  padding: 10px 14px;
+
+  text-align: left;
+
+  font-size: 10.5px;
+  font-weight: 500;
+
+  color: var(--text3);
+
+  text-transform: uppercase;
+  letter-spacing: .8px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: var(--bg2);
+
+  white-space: nowrap;
+}
+
+.role-table td {
+  padding: 12px 14px;
+
+  font-size: 13px;
+  color: var(--text);
+
+  border-bottom: 1px solid var(--border);
+
+  vertical-align: middle;
+}
+
+.role-table tr:last-child td {
+  border-bottom: none;
+}
+
+.role-table tbody tr {
+  cursor: pointer;
+  transition: var(--trans);
+}
+
+.role-table tbody tr:hover td {
+  background: var(--bg3);
+}
+
+
+/* ─── DESCRIPTION ─── */
+
+.role-description {
+  max-width: 300px;
+  color: var(--text2);
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+/* ─── ACTION BUTTONS ─── */
+
+.role-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.role-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+
+  cursor: pointer;
+
+  transition: var(--trans);
+}
+
+.role-action-btn svg {
+  stroke: currentColor;
+}
+
+.role-action-btn.edit {
+  color: var(--accent);
+}
+
+.role-action-btn.edit:hover {
+  background: var(--accent-glow);
+}
+
+.role-action-btn.delete {
+  color: var(--red);
+}
+
+.role-action-btn.delete:hover {
+  background: var(--red-bg);
+}
+
+
+/* ─── PAGINATION ─── */
+
+.pagination {
+  margin-top: 18px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+}
+
+.pagination-size {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--text2);
+  font-size: 13px;
+}
+
+.pagination-size select {
+  padding: 7px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  background: var(--bg2);
+  color: var(--text);
+
+  cursor: pointer;
+
+  outline: none;
+}
+
+.pagination-size select:focus {
+  border-color: var(--accent);
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-btn {
+  padding: 7px 14px;
+
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+
+  background: transparent;
+  color: var(--accent);
+
+  cursor: pointer;
+
+  transition: var(--trans);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: #fff;
+}
+
+.pagination-btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+
+  border-color: var(--border);
+  color: var(--text3);
+}
+
+.pagination-page {
+  font-size: 13px;
+  color: var(--text2);
+  min-width: 30px;
+  text-align: center;
+}
+
+
+/* ─── RESPONSIVE ─── */
+
+@media (max-width: 900px) {
+
+  .filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-wrap {
+    width: 100%;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination-controls {
+    justify-content: center;
+  }
+
+}
+
+/* =========================================================
+   ROLE MODAL
+========================================================= */
+
+.role-modal-overlay{
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1000;
+
+  animation: fadeIn .2s ease;
+}
+
+.role-modal{
+  width: 100%;
+  max-width: 550px;
+
+  background: var(--bg2);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+
+  animation: modalIn .25s ease;
+}
+
+.role-modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:18px 22px;
+
+  border-bottom:1px solid var(--border);
+}
+
+.role-modal-title{
+  font-size:16px;
+  font-weight:600;
+  color:var(--text);
+  font-family:var(--font-display);
+}
+
+.role-close-btn{
+  width:34px;
+  height:34px;
+
+  border:none;
+  border-radius:50%;
+
+  background:transparent;
+
+  color:var(--text2);
+
+  cursor:pointer;
+
+  font-size:18px;
+
+  transition:var(--trans);
+}
+
+.role-close-btn:hover{
+  background:var(--bg3);
+  color:var(--text);
+}
+
+
+/* =========================================================
+   ROLE FORM
+========================================================= */
+
+.role-form{
+  padding:22px;
+}
+
+.role-form-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group label{
+  margin-bottom:7px;
+
+  font-size:12px;
+  font-weight:600;
+
+  color:var(--text2);
+}
+
+.form-group input,
+.form-group textarea{
+  width:100%;
+
+  padding:10px 12px;
+
+  background:var(--bg3);
+
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+
+  color:var(--text);
+
+  font-size:13px;
+
+  outline:none;
+
+  transition:var(--trans);
+
+  box-sizing:border-box;
+}
+
+.form-group textarea{
+  resize:vertical;
+  min-height:90px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  border-color:var(--accent);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+  color:var(--text3);
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.role-modal-footer{
+  margin-top:28px;
+
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.secondary-btn{
+  padding:9px 18px;
+
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+
+  background:transparent;
+
+  color:var(--text);
+
+  cursor:pointer;
+
+  transition:var(--trans);
+}
+
+.secondary-btn:hover{
+  background:var(--bg3);
+}
+
+.primary-btn{
+  padding:9px 18px;
+
+  border:none;
+  border-radius:var(--radius);
+
+  background:var(--accent);
+
+  color:white;
+
+  cursor:pointer;
+
+  transition:var(--trans);
+}
+
+.primary-btn:hover{
+  background:var(--accent2);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes modalIn{
+
+  from{
+    opacity:0;
+    transform:translateY(-20px) scale(.96);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+.pagination-btn {
+  padding: 8px 16px;
+
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+
+  background: var(--accent);
+  color: #fff;
+
+  cursor: pointer;
+
+  transition: var(--trans);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--accent2);
+  border-color: var(--accent2);
+}
+
+/* Disabled Button */
+.pagination-btn:disabled {
+  background: var(--bg4);
+  border-color: var(--border);
+  color: var(--text3);
+
+  cursor: not-allowed;
+  opacity: 0.7;
+}
